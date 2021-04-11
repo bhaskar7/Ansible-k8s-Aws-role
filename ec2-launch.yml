@@ -1,0 +1,42 @@
+- hosts: 127.0.0.1
+  vars_files:
+          - aws-username-password.yml
+  tasks:
+  - name: Launch Ec2 instance Master        
+    amazon.aws.ec2:
+      key_name: hadoop
+      instance_type: t2.micro
+      image: ami-068d43a544160b7ef
+      group_id: sg-0974db000fe8e8d7a
+      count: 1
+      instance_tags:
+              name: master
+      region: ap-south-1
+      vpc_subnet_id: subnet-4404012c
+      assign_public_ip: yes
+      aws_access_key: "{{ user_name }}"
+      aws_secret_key: "{{ password }}"
+      state: present
+
+- hosts: 127.0.0.1
+  vars_files: 
+        - aws-username-password.yml
+  tasks:
+  - name: Launch Ec2 instance Slave       
+    amazon.aws.ec2:
+      key_name: hadoop
+      instance_type: t2.micro
+      image: ami-068d43a544160b7ef
+      group_id: sg-0974db000fe8e8d7a
+      count: 2
+      instance_tags:
+              name: slave
+      region: ap-south-1
+      vpc_subnet_id: subnet-4404012c
+      assign_public_ip: yes
+      aws_access_key: "{{ user_name }}"
+      aws_secret_key: "{{ password }}"
+      state: present
+
+
+
