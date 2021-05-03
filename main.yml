@@ -14,7 +14,7 @@
 - hosts: tag_name_master
   tasks:
   - name: run join cmd in master
-    shell: "kubeadm token  create --print-join-command"
+    shell: "kubeadm token create --print-join-command"
     register: join_cmd_output
 
   - set_fact:
@@ -22,11 +22,11 @@
 
   - add_host:
       name: "joint_register"
-      shared_variable: "{{ shared_join_variable }}"
+      shared_variable: "{{ shared_variable }}"
 
 - hosts: tag_name_slave
   vars:
-    join_slave: "{{ hostvars['joint_register']['shared_join_variable'] }}"
+    join_slave: "{{ hostvars['joint_register']['shared_variable'] }}"
   tasks:
   - name: Joining slave to master node
     shell: "{{ join_slave }}"
@@ -35,4 +35,4 @@
 - hosts: tag_name_master
   tasks:
      - name: Apply flannel
-       shell: kubectl apply  -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml 
+       shell: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml 

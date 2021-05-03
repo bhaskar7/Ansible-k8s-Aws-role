@@ -5,7 +5,7 @@
   - name: Launch Ec2 instance Master        
     amazon.aws.ec2:
       key_name: hadoop
-      instance_type: t2.micro
+      instance_type: t2.large
       image: ami-068d43a544160b7ef
       group_id: sg-0974db000fe8e8d7a
       count: 1
@@ -25,7 +25,7 @@
   - name: Launch Ec2 instance Slave       
     amazon.aws.ec2:
       key_name: hadoop
-      instance_type: t2.micro
+      instance_type: t2.large
       image: ami-068d43a544160b7ef
       group_id: sg-0974db000fe8e8d7a
       count: 2
