@@ -46,7 +46,7 @@
   command: echo "1" >  /proc/sys/net/bridge/bridge-nf-call-iptables
 
 - name: initialize kubeadm
-  command: kubeadm init --pod-network-cidr=10.240.0.0/16  --ignore-preflight-errors=NumCPU --ignore-preflight-errors=Mem
+  command: kubeadm init --pod-network-cidr=10.244.0.0/16  --ignore-preflight-errors=NumCPU --ignore-preflight-errors=Mem
   ignore_errors: True
 
 - name: Creating managed node
